@@ -1,0 +1,2537 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#214d40"><title>Khmer Study 1A + 1B</title><style>body{font:16px system-ui,-apple-system,sans-serif;background:#f4f4ef;color:#1e3830;margin:0}main{max-width:650px;margin:auto;padding:20px 15px 50px}h1{font-size:1.5rem;margin:0}small,.muted{color:#6a786e}.panel{background:white;border:1px solid #dce3db;border-radius:19px;padding:18px;margin-top:16px;box-shadow:0 3px 13px #172f2110}.stack{display:grid;gap:13px}label{display:block;font-size:.86rem;font-weight:650;margin-bottom:5px}select,button{font:inherit;padding:12px;border-radius:12px;border:1px solid #ccd7ce;background:white;color:#1e3830}select{width:100%}button{cursor:pointer}button.primary{background:#214d40;color:white;border-color:#214d40}button:disabled{opacity:.5}.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}.hidden{display:none}.flash{background:#edf4ee;border:1px solid #d7e4da;border-radius:18px;min-height:205px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:15px}.word{font-size:clamp(1.6rem,6vw,2.5rem);font-weight:750;overflow-wrap:anywhere}.hint{font-size:.8rem;color:#62746a}.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.85rem;color:#6a786e;margin-bottom:12px}.choice{display:block;width:100%;text-align:left;margin:7px 0}.correct{background:#d6f0df}.wrong{background:#f8d9d7}.note{font-size:.82rem;line-height:1.5;color:#66736b}.lesson-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:9px 0 16px}.lesson-check{display:flex;align-items:center;gap:6px;border:1px solid #dce3db;border-radius:9px;padding:9px 6px;font-size:.88rem;cursor:pointer}.lesson-check input{width:17px;height:17px;accent-color:#214d40}.level-heading{font-weight:750;margin-top:13px}.notice{border-left:3px solid #bb9246;padding-left:10px}#status{font-weight:650;min-height:22px}</style></head><body><main><h1>Khmer Study Trainer</h1><small>Levels 1A + 1B · romanised Khmer · working edition</small><p class="note">Choose any lessons from both levels. By default, Level 1A and Level 1B Lessons 1–4 are selected.</p><section id="setup" class="panel stack"><div><label>Choose lessons to review</label><p class="note">Select any combination from Level 1A and 1B. Your selection is remembered on this device.</p><div class="row"><button type="button" id="preset">My progress (1A + 1B 1–4)</button><button type="button" id="selectAll">Select all</button><button type="button" id="selectNone">Clear</button></div><div id="lessonPicker"></div></div><div><label>Review mode</label><select id="mode"><option value="speak">Say Khmer aloud → reveal</option><option value="reverse">See Khmer → recall English</option><option value="choice">Multiple choice</option><option value="weak">Review missed words</option><option value="grammar">Grammar patterns</option></select></div><div><label>Session length</label><select id="length"><option>10</option><option selected>20</option><option>30</option><option value="all">All available</option></select></div><div class="meta"><span id="available"></span><span id="known"></span></div><button class="primary" id="start">Start reviewing</button><div class="note notice">This is a functional first edition, not yet a complete transcription. Some 1A entries came from your old app; the 1B set is a selection from the textbook. The full lesson-by-lesson audit and alphabetical word-list check are still to come.</div></section><section id="study" class="panel hidden"><div class="meta"><span id="progress"></span><span id="tag"></span></div><div class="flash"><div class="hint" id="instruction"></div><div class="word" id="question"></div><div class="hint hidden" id="solution"></div><button id="reveal" class="primary">Reveal answer</button></div><div id="options" class="hidden"></div><div class="row" style="margin-top:14px" id="grading"><button id="miss">↺ Review again</button><button id="got" class="primary">✓ I knew it</button></div><div id="status" style="margin-top:12px"></div><div class="row" style="margin-top:12px"><button id="quit">End session</button><button id="skip">Skip →</button></div></section><section id="finish" class="panel hidden"><h2>Session complete</h2><p id="summary"></p><div class="row"><button id="again" class="primary">New session</button><button id="weak">Review misses</button></div></section></main><script id="data" type="application/json">[
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "nyom",
+    "en": "I / me"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "neak",
+    "en": "you"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "groo-bong-rean",
+    "en": "teacher"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "suh",
+    "en": "student"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "piesa Khmer",
+    "en": "Khmer language"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "piesa Onglay",
+    "en": "English language"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "barang / piesa barang",
+    "en": "French person / French language"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "riek-reay dael ban joub neak",
+    "en": "nice / glad to meet you"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "k’mouy",
+    "en": "young child / niece / nephew"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "gon",
+    "en": "own child"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "bpoo",
+    "en": "uncle-type older male"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "meeng",
+    "en": "aunt-type older female"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "om",
+    "en": "older adult respectful form"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "lok-dtaa",
+    "en": "grandfather"
+  },
+  {
+    "level": "1A",
+    "lesson": 1,
+    "km": "lok-yeay",
+    "en": "grandmother"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "dtom-bpor",
+    "en": "page"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "bpro-yok",
+    "en": "sentence"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "dteang-oh k’nea",
+    "en": "all together"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "ot sow jbah",
+    "en": "not very clear"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "jro-lom",
+    "en": "confused"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "som-rak",
+    "en": "rest / take a break"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "aowee",
+    "en": "give / do for"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "jenh-layng",
+    "en": "go outside to play"
+  },
+  {
+    "level": "1A",
+    "lesson": 2,
+    "km": "m’dong dteat",
+    "en": "one more time / again"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "bpon-dtae",
+    "en": "but"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "nah",
+    "en": "very"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "jbah",
+    "en": "clear"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "mayn-dtayn",
+    "en": "really / truly"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "yoo-nau",
+    "en": "how long?"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "yoo",
+    "en": "long time"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "min-sow-yoo",
+    "en": "not very long"
+  },
+  {
+    "level": "1A",
+    "lesson": 3,
+    "km": "hai",
+    "en": "already"
+  },
+  {
+    "level": "1A",
+    "lesson": 4,
+    "km": "joh neak winh?",
+    "en": "how about you?"
+  },
+  {
+    "level": "1A",
+    "lesson": 4,
+    "km": "bpouk-yerng",
+    "en": "we"
+  },
+  {
+    "level": "1A",
+    "lesson": 4,
+    "km": "bpouk-gay",
+    "en": "they"
+  },
+  {
+    "level": "1A",
+    "lesson": 4,
+    "km": "ot",
+    "en": "no / not"
+  },
+  {
+    "level": "1A",
+    "lesson": 4,
+    "km": "ot-dtay",
+    "en": "no, not that"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "sbaik-jerng",
+    "en": "shoes"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "med-peak",
+    "en": "friend"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "bpro-bpon",
+    "en": "wife"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "pdey",
+    "en": "husband"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "ro-bay-ga",
+    "en": "report"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "jong + verb",
+    "en": "want to do"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "jong-ban + noun",
+    "en": "want to have / want something"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "jong-aowee + person + verb",
+    "en": "want someone to do something"
+  },
+  {
+    "level": "1A",
+    "lesson": 5,
+    "km": "bpouk-mak",
+    "en": "best friend"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "m’sel-m’ngai",
+    "en": "day before yesterday"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "gom-bpoong",
+    "en": "currently / ongoing"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "royeak-bpayl",
+    "en": "duration / for a period"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "dtow … winh",
+    "en": "go back to"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "mok … winh",
+    "en": "come back to"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "mok-bpee … winh",
+    "en": "come back from"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "dtow-layng",
+    "en": "go visit"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "mok-layng",
+    "en": "come visit the speaker"
+  },
+  {
+    "level": "1A",
+    "lesson": 6,
+    "km": "som-rab",
+    "en": "intended for / for"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "gro-hom",
+    "en": "red"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "bpor-gro-hom",
+    "en": "the color red"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "bro-peh",
+    "en": "gray"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "bpor-sral",
+    "en": "light color"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "t’ngai-sao",
+    "en": "Saturday"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "t’ngai-bpro-hoah",
+    "en": "Thursday"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "dtom-bpeang-bay-joo",
+    "en": "grape"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "muoy poan",
+    "en": "1,000"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "muoy mern",
+    "en": "10,000"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "dop poan",
+    "en": "10,000 (compositional form)"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "dop mern / saen",
+    "en": "100,000"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "pi mern pram poan",
+    "en": "25,000"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "roy",
+    "en": "100"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "lean",
+    "en": "1,000,000"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "p’nyeak-bpee-gayng",
+    "en": "wake up"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "muj-dtuk",
+    "en": "shower"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "twer-m’hop",
+    "en": "cook"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "jenh",
+    "en": "leave / go out"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "merl roeung",
+    "en": "watch a movie"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "daur-layng",
+    "en": "hang out"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "dtow-graw",
+    "en": "go out"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "jab-pdaurm",
+    "en": "start / begin"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "maong",
+    "en": "hour / o’clock"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "gon-lah",
+    "en": "half"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "mok-dol",
+    "en": "come / arrive"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "dtow-dol",
+    "en": "go / arrive"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "bpro-hael",
+    "en": "approximately / about"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "nea-dtee",
+    "en": "minute"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "mun",
+    "en": "ago / before"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "klang",
+    "en": "strong"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "bong-p’oun",
+    "en": "sibling"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "bong-bproh",
+    "en": "older brother"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "p’oun-bproh",
+    "en": "younger brother"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "gon-bproh",
+    "en": "son"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "gon-srey",
+    "en": "daughter"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "bpro-jom",
+    "en": "meeting"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "jea-tomada",
+    "en": "usually"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "klean",
+    "en": "hungry"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "nyam bay",
+    "en": "eat a meal"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "ban ot?",
+    "en": "okay? / is that possible?"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "dteat",
+    "en": "another / more"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "neak",
+    "en": "person classifier"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "kbal",
+    "en": "book classifier"
+  },
+  {
+    "level": "1A",
+    "lesson": 9,
+    "km": "kroeung",
+    "en": "vehicle classifier"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "ey",
+    "en": "what? (casual)"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "awey",
+    "en": "what? (fuller form)"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "awey-dael",
+    "en": "what / the thing that…"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "aaj",
+    "en": "can / be able to"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "ot ban dtay",
+    "en": "cannot"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "rowol dtij",
+    "en": "a little busy"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "ban dtaur",
+    "en": "sure / certainly"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "dtae bpon nung ban hai",
+    "en": "that much is enough already"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "min-ey-dtay",
+    "en": "no problem / it’s nothing"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "joub k’nea dtij dteat jung",
+    "en": "see you later"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "yok",
+    "en": "take / choose"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "loak yang-mij?",
+    "en": "how do you sell it? / pricing arrangement"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "t’lai bpon-maan?",
+    "en": "how much does it cost?"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "ey-klah",
+    "en": "something / some things"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "groan-dtae",
+    "en": "just / only"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "leay",
+    "en": "mix / blend"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "jrobol",
+    "en": "mix thoroughly"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "go",
+    "en": "stir with a utensil"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "bon-taem",
+    "en": "add more"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "dak",
+    "en": "put / place"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-ler",
+    "en": "on / above / upstairs"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-graom",
+    "en": "under / below / downstairs"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-k’nong",
+    "en": "inside"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-graw",
+    "en": "outside"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "jit",
+    "en": "near"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "ch’ngay",
+    "en": "far"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-muk",
+    "en": "in front of"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-graowee",
+    "en": "behind"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-sdam",
+    "en": "right side"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "kang-ch’wayng",
+    "en": "left side"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtol-muk",
+    "en": "opposite"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "gaj-jroung",
+    "en": "on the corner"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "nau-dtam-plow",
+    "en": "on the way"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "rong-wong-mool",
+    "en": "roundabout"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtoo-dtuk-gork",
+    "en": "refrigerator"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtok",
+    "en": "table"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtoo-kaow-aow",
+    "en": "closet"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "gray",
+    "en": "bed"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "gao-ey",
+    "en": "chair"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "mean-ga-ey?",
+    "en": "what’s up?"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "suer-taa",
+    "en": "ask that / ask whether"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "l’ngeaj",
+    "en": "evening"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "tloab…ot?",
+    "en": "have you ever…?"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "plow-jeat",
+    "en": "National Road"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "rohot-dol",
+    "en": "until"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "son-ta-gea",
+    "en": "hotel"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "bon-dtoab-mok",
+    "en": "and then"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "twea-robong",
+    "en": "gate"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "gut-taa",
+    "en": "think that"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "plow-dey-grohom",
+    "en": "dirt road / red-earth road"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "gon-laeng-dael",
+    "en": "where / the place where"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtom-nay",
+    "en": "free / available"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "mean-dter",
+    "en": "yes, I do / certainly"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "jih",
+    "en": "ride / drive"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "jih-dtam",
+    "en": "drive / ride along; follow"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "hai bot ch’wayng",
+    "en": "then turn left"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "bot sdam",
+    "en": "turn right"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "dtow-naa?",
+    "en": "where are you going?"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "bpee-naa?",
+    "en": "from where?"
+  },
+  {
+    "level": "1A",
+    "lesson": 11,
+    "km": "nau-naa?",
+    "en": "where is it?"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-bpruk",
+    "en": "morning"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-t’ngai-dtrong",
+    "en": "noon until about 2 p.m."
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-t’ngai / bpayl-ro-seal",
+    "en": "afternoon"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-l’ngeaj",
+    "en": "evening"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-yob",
+    "en": "nighttime"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "roal",
+    "en": "every"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpruk minh",
+    "en": "this morning (past)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpruk nih",
+    "en": "this morning (future)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpruk m’sel-minh",
+    "en": "yesterday morning"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "yob sa-aik",
+    "en": "tomorrow night"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "mun-bpayl",
+    "en": "before doing something"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpee-mun",
+    "en": "previously / before now"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "graowee-bpayl",
+    "en": "after a noun or time"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bon-dtoab-bpee",
+    "en": "after doing something"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "graowee",
+    "en": "after a person or time"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "dtaeng-dtae",
+    "en": "always (before the verb)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "rohot",
+    "en": "always (at the end)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "jea-tomada",
+    "en": "usually"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bpayl-klah",
+    "en": "sometimes"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "ou-saa",
+    "en": "often (before the verb)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "nyuk-nyoab",
+    "en": "often (at the end)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "min-sow",
+    "en": "rarely"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "tloab",
+    "en": "ever / used to / have been"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "min-tloab / min-dael",
+    "en": "never"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "yoo-yoo-mdong",
+    "en": "once in a while"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bon-dtoab-dtuk",
+    "en": "bathroom"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "reab-jom gray",
+    "en": "make the bed"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "gayng-t’ngai",
+    "en": "take a nap"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "daum-bey",
+    "en": "in order to"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "dol",
+    "en": "until"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "joal rean",
+    "en": "go to school"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "jenh bpee rean",
+    "en": "leave school"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "gej-ga-pteah",
+    "en": "homework"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "joal-gayng",
+    "en": "go to bed"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "hat-bpran",
+    "en": "exercise / work out"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "hael-dtuk",
+    "en": "swim / go swimming"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bay-bpayl-bpruk",
+    "en": "breakfast"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bay-t’ngai",
+    "en": "lunch"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "ah-haar t’ngai",
+    "en": "lunch (casual spoken form)"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bay-bpayl-l’ngeaj",
+    "en": "dinner"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "nau kandal",
+    "en": "in between / in the middle"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "suer",
+    "en": "ask"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "yuet",
+    "en": "late"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "bproh / pi-bproh",
+    "en": "because"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "haet-ey?",
+    "en": "why?"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "jom-nuos",
+    "en": "instead"
+  },
+  {
+    "level": "1A",
+    "lesson": 12,
+    "km": "som-nour",
+    "en": "question"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Jub-leang",
+    "en": "Party"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Reab-jom",
+    "en": "Prepare"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Dtee-nih",
+    "en": "Here"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Dtee-nuh",
+    "en": "There"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Satan-na-peap",
+    "en": "Situation"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Jab-pdaurm",
+    "en": "To start"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Gom-rong",
+    "en": "A plan"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Cheu",
+    "en": "To be sick"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Baur-sen-jea",
+    "en": "If"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Jea",
+    "en": "Better / recover"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Jum-nuerh",
+    "en": "Instead"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Winh",
+    "en": "Instead (at end)"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Dae",
+    "en": "Also"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Jom-nay",
+    "en": "To spend"
+  },
+  {
+    "level": "1B",
+    "lesson": 1,
+    "km": "Bpayl-naa",
+    "en": "When"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "La-or",
+    "en": "Good"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Onn",
+    "en": "Bad"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Tlai",
+    "en": "Expensive"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Taok",
+    "en": "Cheap"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Dtooj",
+    "en": "Small"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Tom",
+    "en": "Big"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Dteap",
+    "en": "Short in height"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Kpooah",
+    "en": "High"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Kley",
+    "en": "Short in length"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Wayng",
+    "en": "Long"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Lern",
+    "en": "Fast"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Yert",
+    "en": "Slow"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Toat",
+    "en": "Fat"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Skom",
+    "en": "Skinny"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Bpro-yat",
+    "en": "Careful"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Bpro-haeh",
+    "en": "Careless"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Kmayng",
+    "en": "Young"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Jah",
+    "en": "Old"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Tmey",
+    "en": "New"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Sa-at",
+    "en": "Beautiful"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Ah-grok",
+    "en": "Ugly"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Dtun",
+    "en": "Soft"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Rung",
+    "en": "Hard"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Kdaw",
+    "en": "Hot"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Dtro-jeak",
+    "en": "Cold"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Mean-groah-tnak",
+    "en": "Dangerous"
+  },
+  {
+    "level": "1B",
+    "lesson": 2,
+    "km": "Mean-so-wa-te-peap",
+    "en": "Safe"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "P'nyaur",
+    "en": "Send things"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "P'joon",
+    "en": "Send a person"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Ban",
+    "en": "Receive (common)"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Dto-dtoul",
+    "en": "Receive (formal)"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Saa",
+    "en": "Text / message"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "P'nyaur-saa",
+    "en": "To text"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Nea-le-ga",
+    "en": "Watch"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Bong-p'oun",
+    "en": "Sibling"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Roob-tort",
+    "en": "Photo"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Gon-j'bong",
+    "en": "First child"
+  },
+  {
+    "level": "1B",
+    "lesson": 3,
+    "km": "Manooh-dael",
+    "en": "Who / person who"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Dtom-nay",
+    "en": "Free"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Ro-wol",
+    "en": "Busy"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Klean",
+    "en": "Hungry"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Srayk-dtuk",
+    "en": "Thirsty"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Oh-gom-lang",
+    "en": "Tired"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Mean-gom-lang",
+    "en": "Energetic"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Bpee-bak",
+    "en": "Difficult"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Sruerl",
+    "en": "Easy"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Klang",
+    "en": "Strong"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Ksaoy",
+    "en": "Weak"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Dton",
+    "en": "Soft"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Rung",
+    "en": "Hard"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "La-or",
+    "en": "Good"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Onn",
+    "en": "Bad"
+  },
+  {
+    "level": "1B",
+    "lesson": 4,
+    "km": "Ean",
+    "en": "Shy"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Bpee-bprooah",
+    "en": "Because"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Daowee-sa",
+    "en": "Because"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Jbah",
+    "en": "Clear"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Yoo-nau",
+    "en": "How long"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Ban ... hai",
+    "en": "For (past duration)"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Dtrow",
+    "en": "Must"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Poom",
+    "en": "Village"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Jon-jeat",
+    "en": "Nationality"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Peak-jraurn",
+    "en": "Most"
+  },
+  {
+    "level": "1B",
+    "lesson": 5,
+    "km": "Bpee-bak-jet",
+    "en": "Sad"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Dom-bong",
+    "en": "First"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Bon-dtoab-mok",
+    "en": "Next"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Bon-dtoab-mok-dteat",
+    "en": "After that"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Jong-graowee",
+    "en": "Last of all"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Smoh-dtrong",
+    "en": "Faithful"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Jet-la-or",
+    "en": "Kind"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Gom-plaeng",
+    "en": "Funny"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Jet-ah-grok",
+    "en": "Bad"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Mort-jort",
+    "en": "Serious"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Bong-gaurt",
+    "en": "Create"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Twer",
+    "en": "Make"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Twer-aowee",
+    "en": "Make someone do"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Bpi-peak-sa",
+    "en": "Discuss"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Gei-ga",
+    "en": "Work"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Neak-dteang-oh-knea",
+    "en": "Everybody"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Daum-bey",
+    "en": "In order to"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Doh-sray",
+    "en": "Solve"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Bpanh-haa",
+    "en": "Problem"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Gou-dtae",
+    "en": "Should"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Sok-ga-peap",
+    "en": "Health"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Ah-na-mai",
+    "en": "Hygiene"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Srae",
+    "en": "Rice field"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "May-poom",
+    "en": "Village chief"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Ga-yol-bprom",
+    "en": "Permission"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Gom-nut",
+    "en": "Idea"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Aaj ... ban",
+    "en": "Can"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Dteang-bpee",
+    "en": "Both"
+  },
+  {
+    "level": "1B",
+    "lesson": 6,
+    "km": "Doj-ch-neh",
+    "en": "Therefore"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Bok-brae",
+    "en": "Translate"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Smak-jet",
+    "en": "Volunteer"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Mneak-aeng",
+    "en": "Alone"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Daowee-kloun-aeng",
+    "en": "By oneself"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Rom-luk",
+    "en": "Review"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Bpayl-dael",
+    "en": "Whilst"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Hat",
+    "en": "Practise"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Reu / do",
+    "en": "Move"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Suer",
+    "en": "Ask"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Som",
+    "en": "Request"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Gom",
+    "en": "Don't do it"
+  },
+  {
+    "level": "1B",
+    "lesson": 7,
+    "km": "Ham",
+    "en": "Don't do what you are going to do"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Rok-merl",
+    "en": "Look for"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Rok-kernh",
+    "en": "Find lost thing"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Rerh-ban",
+    "en": "Find something unknown"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Bat",
+    "en": "Lose something"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Srok kilo",
+    "en": "Lose weight"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Wong-wayng-plow",
+    "en": "Lose direction"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Janh",
+    "en": "Lose competition"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Smoh-dtrong",
+    "en": "Faithful"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Kla-han",
+    "en": "Brave"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Ah-grok",
+    "en": "Bad / evil"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Bpee-rooah",
+    "en": "Beautiful sound"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Sa-at",
+    "en": "Nice"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Lern",
+    "en": "Quick"
+  },
+  {
+    "level": "1B",
+    "lesson": 8,
+    "km": "Gom-nung",
+    "en": "Serious"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Looj",
+    "en": "Steal"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Plom",
+    "en": "Rob"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Som-lab",
+    "en": "Kill"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Rom-lop",
+    "en": "Rape"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Jab",
+    "en": "Arrest"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Wai",
+    "en": "Hit"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Sang-song",
+    "en": "Build"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "To-nea-gea",
+    "en": "Bank"
+  },
+  {
+    "level": "1B",
+    "lesson": 9,
+    "km": "Rot-ta-pi-bal",
+    "en": "Government"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Sdab ban",
+    "en": "Get it"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Sdab ot ban",
+    "en": "Don't get it"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Merl kernh",
+    "en": "Clear"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Merl ot kernh",
+    "en": "Not clear"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Rean jeh",
+    "en": "Know how"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Rean ot jeh",
+    "en": "Don't know how"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Rot rouj",
+    "en": "Got away"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Rot ot rouj",
+    "en": "Couldn't get away"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Twer ban",
+    "en": "Can"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Twer ot ban",
+    "en": "Can't"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Niyey mayn",
+    "en": "I mean it"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Niyey layng",
+    "en": "I'm kidding"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Ga-bob-luy",
+    "en": "Wallet"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Brab",
+    "en": "Tell"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Dterb-dtae",
+    "en": "Just done something"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Jam-ma-playt",
+    "en": "Hold on"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Chaek",
+    "en": "Check"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Wea min dae",
+    "en": "Impossible"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Gom bpee-bak-jet-ey",
+    "en": "Cheer up"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Loy meh",
+    "en": "So cool"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Lerh hai",
+    "en": "That's enough"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Kmean dtow s'ey dtay",
+    "en": "No worries"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Ta mayn mayn",
+    "en": "I knew it"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Gat sork",
+    "en": "Cut hair"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Doj",
+    "en": "Same as"
+  },
+  {
+    "level": "1B",
+    "lesson": 10,
+    "km": "Reap-ga",
+    "en": "Wedding"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Saw",
+    "en": "White"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Kmao",
+    "en": "Black"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Kaew",
+    "en": "Blue"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Loeung",
+    "en": "Yellow"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Bai-dtong",
+    "en": "Green"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Bpor-pka-chook",
+    "en": "Pink"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Bpor-svay",
+    "en": "Purple"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-cher",
+    "en": "Fruit"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-bpom",
+    "en": "Apple"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-jayk",
+    "en": "Banana"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-groj",
+    "en": "Orange (fruit)"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-mnoah",
+    "en": "Pineapple"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-ow-luk",
+    "en": "Watermelon"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-dong",
+    "en": "Coconut"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Plae-svay",
+    "en": "Mango"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Pa-aem",
+    "en": "Sweet"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Joo",
+    "en": "Sour"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Brai",
+    "en": "Salty"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Lwing",
+    "en": "Bitter"
+  },
+  {
+    "level": "1A",
+    "lesson": 7,
+    "km": "Hel",
+    "en": "Spicy"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Soon",
+    "en": "Zero"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Muoy",
+    "en": "One"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Bpee",
+    "en": "Two"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Bey",
+    "en": "Three"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Buon",
+    "en": "Four"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Pram",
+    "en": "Five"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Dop",
+    "en": "Ten"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Mphey",
+    "en": "Twenty"
+  },
+  {
+    "level": "1A",
+    "lesson": 8,
+    "km": "Muoy-roy",
+    "en": "One hundred"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Bon-lae",
+    "en": "Vegetables"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Dro-sok",
+    "en": "Cucumber"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Bpayng-poh",
+    "en": "Tomato"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Kdtum-barang",
+    "en": "Onion"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Ga-rot",
+    "en": "Carrot"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Saj-go",
+    "en": "Beef"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Saj-jrook",
+    "en": "Pork"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Saj-moan",
+    "en": "Chicken"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Dtrey",
+    "en": "Fish"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Bong-gea",
+    "en": "Shrimp"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Skaw",
+    "en": "Sugar"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Om-bel",
+    "en": "Salt"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Ma-rek",
+    "en": "Pepper"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Cha",
+    "en": "To stir fry"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Jet",
+    "en": "To peel"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Ang",
+    "en": "To grill"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Leang",
+    "en": "To wash"
+  },
+  {
+    "level": "1A",
+    "lesson": 10,
+    "km": "Han",
+    "en": "To slice"
+  }
+]</script><script>
+const vocab=JSON.parse(document.getElementById('data').textContent),$=id=>document.getElementById(id),KEY='khmer_combined_progress_v1';let stats={};try{stats=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}let queue=[],index=0,card=null,revealed=false,score=0,missed=0,answered=false,mode='speak',choices=[];
+const grammar=[['1A',3,'Negatives','ot/min + verb + ... + dtay'],['1A',4,'Yes/no questions','subject + verb + object + ot?'],['1A',5,'Possessives','rob oh + person'],['1A',8,'Numbers and classifiers','noun + number + classifier'],['1A',11,'Where','dtow-naa? / nau-naa? / bpee-naa?'],['1B',1,'When','bpayl-naa? / ong-gal?'],['1B',2,'Comparative','adjective + jeang + object'],['1B',2,'Superlative','adjective + jeang-gay'],['1B',3,'Who','naa-gay / no-naa'],['1B',4,'To be','jea + noun; ah-yu + age'],['1B',5,'Why','haet-ey? / mij-gaw?'],['1B',6,'How','... + yang-mij?'],['1B',7,'Polite request','som + verb + pong'],['1B',7,'Should','gou-dtae + verb'],['1B',7,'Can','aaj + verb + ban'],['1B',8,'Noun prefix','ga + verb / neak + verb'],['1B',9,'Passive','dtrow + person + verb']].map((x,i)=>({level:x[0],lesson:x[1],km:x[2],en:x[3],grammar:true}));
+function id(x){return x.level+'|'+x.lesson+'|'+x.km.toLowerCase()}function shuffle(a){return [...a].sort(()=>Math.random()-.5)}function save(){try{localStorage.setItem(KEY,JSON.stringify(stats))}catch(e){}}const SELECT_KEY='khmer_selected_lessons_v1';
+const allLessons=[...Array.from({length:12},(_,i)=>'1A|'+(i+1)),...Array.from({length:10},(_,i)=>'1B|'+(i+1))];
+const defaultLessons=allLessons.filter(k=>k.startsWith('1A|')||(k.startsWith('1B|')&&Number(k.split('|')[1])<=4));
+let selectedLessons;try{const saved=JSON.parse(localStorage.getItem(SELECT_KEY));selectedLessons=Array.isArray(saved)?new Set(saved.filter(k=>allLessons.includes(k))):new Set(defaultLessons)}catch(e){selectedLessons=new Set(defaultLessons)}
+function renderLessons(){const root=$('lessonPicker');root.innerHTML='';for(const [level,max] of [['1A',12],['1B',10]]){const head=document.createElement('div');head.className='level-heading';head.textContent='Level '+level;root.appendChild(head);const grid=document.createElement('div');grid.className='lesson-grid';for(let n=1;n<=max;n++){const key=level+'|'+n,lab=document.createElement('label'),input=document.createElement('input');lab.className='lesson-check';input.type='checkbox';input.checked=selectedLessons.has(key);input.onchange=()=>{if(input.checked)selectedLessons.add(key);else selectedLessons.delete(key);persistSelection();updateCount()};lab.append(input,document.createTextNode('Lesson '+n));grid.appendChild(lab)}root.appendChild(grid)}}
+function persistSelection(){try{localStorage.setItem(SELECT_KEY,JSON.stringify([...selectedLessons]))}catch(e){}}
+function setLessons(keys){selectedLessons=new Set(keys);persistSelection();renderLessons();updateCount()}
+$('preset').onclick=()=>setLessons(defaultLessons);$('selectAll').onclick=()=>setLessons(allLessons);$('selectNone').onclick=()=>setLessons([]);
+function getPool(){let m=$('mode').value;return (m==='grammar'?grammar:vocab).filter(x=>selectedLessons.has(x.level+'|'+x.lesson)&&(m!=='weak'||(stats[id(x)]?.miss||0)>(stats[id(x)]?.recovered||0)))}
+function updateCount(){let p=getPool();$('available').textContent=p.length+' available entries from '+selectedLessons.size+' selected lessons';$('known').textContent=Object.values(stats).filter(s=>s.ok>0).length+' practised successfully'}
+$('mode').onchange=updateCount;renderLessons();updateCount();
+function show(){if(index>=queue.length){end();return}card=queue[index];revealed=false;answered=false;$('progress').textContent=(index+1)+' of '+queue.length;$('tag').textContent=card.level+' · Lesson '+card.lesson;$('status').textContent='';$('solution').classList.add('hidden');$('grading').classList.add('hidden');$('reveal').classList.remove('hidden');$('options').classList.add('hidden');$('question').textContent=mode==='reverse'?card.km:card.en;$('instruction').textContent=mode==='reverse'?'Say the English meaning':mode==='grammar'?'Recall the Khmer grammar pattern':'Say this in Khmer';if(mode==='grammar'){$('question').textContent=card.km;$('instruction').textContent='Recall the pattern'}if(mode==='choice'){let distract=shuffle(queue.filter(x=>x.en!==card.en&&x.km!==card.km)).slice(0,3).map(x=>x.km);choices=shuffle([card.km,...distract]);$('options').innerHTML='';choices.forEach(c=>{let b=document.createElement('button');b.className='choice';b.textContent=c;b.onclick=()=>{if(answered)return;answered=true;let ok=c===card.km;record(ok);$('status').textContent=ok?'Correct':'Correct: '+card.km;[...$('options').children].forEach(el=>{el.disabled=true;if(el.textContent===card.km)el.classList.add('correct');else if(el===b)el.classList.add('wrong')});$('reveal').classList.add('hidden');$('grading').classList.remove('hidden');$('miss').textContent='Next →';$('got').classList.add('hidden')};$('options').appendChild(b)});$('options').classList.remove('hidden');$('reveal').classList.add('hidden')}}function record(ok){let k=id(card),s=stats[k]||{ok:0,miss:0,recovered:0};if(ok){s.ok++;s.recovered=Math.min(s.miss,s.recovered+1);score++}else{s.miss++;missed++}stats[k]=s;save()}function advance(){index++;$('got').classList.remove('hidden');$('miss').textContent='↺ Review again';show()}$('reveal').onclick=()=>{revealed=true;$('solution').textContent=(mode==='reverse'||mode==='grammar')?card.en:card.km;$('solution').classList.remove('hidden');$('reveal').classList.add('hidden');$('grading').classList.remove('hidden')};$('got').onclick=()=>{record(true);advance()};$('miss').onclick=()=>{if(mode!=='choice')record(false);advance()};$('skip').onclick=advance;$('quit').onclick=end;function end(){$('study').classList.add('hidden');$('finish').classList.remove('hidden');$('summary').textContent='Known: '+score+' · Missed: '+missed+' · Skipped: '+Math.max(0,index-score-missed)+'. Your progress is saved on this device.'}function start(){mode=$('mode').value;queue=shuffle(getPool());if(!queue.length){alert('No entries available for this selection.');return}let n=$('length').value;if(n!=='all')queue=queue.slice(0,+n);index=0;score=0;missed=0;$('setup').classList.add('hidden');$('finish').classList.add('hidden');$('study').classList.remove('hidden');show()}$('start').onclick=start;$('again').onclick=()=>{$('finish').classList.add('hidden');$('setup').classList.remove('hidden');updateCount()};$('weak').onclick=()=>{$('mode').value='weak';start()};
+</script></body></html>
